@@ -5,12 +5,13 @@ importScripts('./schema.js');
 const scope = new URL(self.registration.scope);
 const url = path => new URL(path, scope).href;
 const prefix = 'casur-field:' + scope.pathname + ':';
-const shell = prefix + 'shell-v3';
+const shell = prefix + 'shell-v4';
 const store = prefix + 'data-v1';
 const index = url('index.html');
 const dataFile = url('data/cronologico.json');
 const assets = ['index.html', 'styles.css', 'schema.js', 'app.js', 'manifest.webmanifest',
-  'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png'].map(url);
+  'icons/icon-192.png', 'icons/icon-512.png', 'icons/maskable-512.png',
+  'assets/negocios-de-cana.webp'].map(url);
 const { isFieldSnapshot } = self.CasurFieldData;
 let pendingData;
 

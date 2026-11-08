@@ -25,7 +25,7 @@ h1, h2, p, dl, dd { margin: 0; }
 .masthead { background: var(--forest); color: white; padding-top: env(safe-area-inset-top); }
 .masthead-inner { min-height: 63px; display: flex; align-items: center; justify-content: space-between; gap: 14px; }
 .brand { display: flex; align-items: center; gap: 9px; font-size: .96rem; font-weight: 800; letter-spacing: .06em; }
-.brand img { border-radius: 10px; }
+.brand img { object-fit: contain; border-radius: 9px; background: white; padding: 2px; }
 .brand small { display: block; color: #c6d9ca; font-size: .65rem; font-weight: 560; letter-spacing: .06em; }
 .install, .dialog-head button { min-height: 44px; border: 1px solid #779382; border-radius: 9px; background: transparent; padding: 0 12px; font-size: .85rem; font-weight: 650; }
 
@@ -37,6 +37,9 @@ h1, h2, p, dl, dd { margin: 0; }
 .eyebrow > span { width: 7px; height: 7px; background: #c9df82; border-radius: 50%; }
 .hero h1 { margin-top: 6px; font-size: clamp(1.64rem, 5.9vw, 2.7rem); line-height: 1.08; letter-spacing: -.04em; }
 .subtitle { margin-top: 5px; color: #daeadc; font-size: .96rem; }
+.assignment { display: flex; flex-wrap: wrap; gap: 4px 14px; margin-top: 13px; color: #e9f3e7; font-size: .75rem; line-height: 1.35; }
+.assignment span:first-child { padding-left: 9px; border-left: 3px solid #d4e693; }
+.assignment strong { font-weight: 780; }
 .source-line { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin-top: 10px; }
 #source { color: #e2ebe3; font-size: .71rem; line-height: 1.35; overflow-wrap: anywhere; }
 #refresh { display: grid; place-items: center; width: 44px; height: 44px; flex: 0 0 44px; border: 1px solid #709181; border-radius: 9px; background: #ffffff10; color: white; }

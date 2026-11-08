@@ -60,6 +60,12 @@ function tchTone(value) {
   return value < 45 ? 'low' : value < 70 ? 'medium' : 'high';
 }
 
+function previousSeason(season) {
+  const parts = /^(\d\d)\/(\d\d)$/.exec(season);
+  return parts ? [Number(parts[1]) - 1, Number(parts[2]) - 1]
+    .map(year => String((year + 100) % 100).padStart(2, '0')).join('/') : '25/26';
+}
+
 function chooseFarm(code) {
   if (code === selection) return;
   farmFilters.set(selection, [byId('search').value, byId('filter').value, byId('sort').value]);
@@ -119,7 +125,8 @@ function renderLots() {
   byId('empty').hidden = rows.length > 0;
   byId('list').replaceChildren(...rows.map(row => {
     const item = element('li');
-    const card = element('article', 'lot-card tone-' + tchTone(row.tch));
+    const estimate = row.participatesMilling ? row.tchEst2627 : null;
+    const card = element('article', 'lot-card tone-' + tchTone(estimate));
     const button = element('button', 'open-lot', 'Suerte ' + row.suerte);
     button.type = 'button';
     button.setAttribute('aria-haspopup', 'dialog');
@@ -131,7 +138,7 @@ function renderLots() {
     const variety = element('span', 'variety', [row.variedad, row.tipoRiego].filter(Boolean).join(' · ') || dash);
     const data = element('dl', 'lot-metrics');
     data.append(metric('Área', n(row.area, ' ha')),
-      metric('TCH zafra pasada', n(row.tch), 'tch-metric'),
+      metric('TCH estimado Z' + snapshot.season, n(estimate), 'tch-metric'),
       metric('Edad actual', ageLabel(row)),
       metric('Cosecha propuesta', row.participatesCurrentArea ? d(row.proposedHarvest) : dash));
     card.append(top, variety, data);
@@ -152,7 +159,7 @@ function showLot(farm, row) {
   const details = [
     ['Variedad', row.variedad], ['Tipo de riego', row.tipoRiego], ['N.º de riegos registrado', row.numeroRiegos],
     ['Último corte registrado', d(row.fUltCte)], ['Fecha de siembra', d(row.fSiembra)], ['N.º de cortes', row.corte],
-    ['TCH zafra pasada', n(row.tch)], ['Toneladas estimadas', row.participatesMilling ? n(row.millingEstimatedTons, ' t') : dash],
+    ['TCH Z' + previousSeason(snapshot.season), n(row.tch)], ['Toneladas estimadas', row.participatesMilling ? n(row.millingEstimatedTons, ' t') : dash],
     ['Área de inventario', n(row.inventoryArea, ' ha')], ['Separación entre surcos', row.surco ? row.surco + ' m' : null],
     ['Textura', row.textura], ['Distancia', n(row.distancia, ' km')]
   ];
