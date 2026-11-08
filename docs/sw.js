@@ -5,7 +5,7 @@ importScripts('./schema.js');
 const scope = new URL(self.registration.scope);
 const url = path => new URL(path, scope).href;
 const prefix = 'casur-field:' + scope.pathname + ':';
-const shell = prefix + 'shell-v1';
+const shell = prefix + 'shell-v2';
 const store = prefix + 'data-v1';
 const index = url('index.html');
 const dataFile = url('data/cronologico.json');

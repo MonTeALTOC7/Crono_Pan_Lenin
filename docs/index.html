@@ -5,7 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <meta name="theme-color" content="#153c2d">
   <meta name="description" content="Consulta de campo del cronológico de Pansaco y Claudio Reyes.">
-  <title>Cronológico de Campo · CASUR</title>
+  <title>Cronológico Fincas Pansaco</title>
   <link rel="manifest" href="./manifest.webmanifest">
   <link rel="icon" href="./icons/icon-192.png">
   <link rel="apple-touch-icon" href="./icons/icon-192.png">
@@ -16,14 +16,14 @@
 <body>
   <header class="masthead">
     <div class="wrap masthead-inner">
-      <div class="brand"><img src="./icons/icon-192.png" width="36" height="36" alt=""><span>CASUR <small>Negocios de Caña</small></span></div>
+      <div class="brand"><img src="./icons/icon-192.png" width="36" height="36" alt=""><span>Cronológico <small>Fincas Pansaco</small></span></div>
       <button type="button" class="install" id="install" aria-haspopup="dialog">Instalar</button>
     </div>
   </header>
   <main class="wrap">
     <section class="hero" aria-labelledby="title">
       <p class="eyebrow"><span aria-hidden="true"></span> Consulta de campo</p>
-      <h1 id="title">Cronológico de suertes</h1>
+      <h1 id="title">Cronológico Fincas Pansaco</h1>
       <p class="subtitle">Pansaco y Claudio Reyes</p>
       <div class="source-line">
         <p id="source">Consultando el corte publicado…</p>
@@ -60,7 +60,7 @@
         <ul id="list" class="lot-list"></ul>
       </section>
     </section>
-    <footer>Maestro de Suertes CASUR · Consulta de solo lectura</footer>
+    <footer>Cronológico de campo · Consulta de solo lectura</footer>
   </main>
 
   <dialog id="lot-dialog" aria-labelledby="lot-title">
@@ -72,13 +72,17 @@
   </dialog>
   <dialog id="install-dialog" aria-labelledby="install-title">
     <div class="dialog-head">
-      <h2 id="install-title">Instalar en el teléfono</h2>
-      <form method="dialog"><button type="submit" aria-label="Cerrar instrucciones">Cerrar</button></form>
+      <h2 id="install-title">Instalá Cronológico Fincas Pansaco</h2>
+      <form method="dialog"><button type="submit" aria-label="Cerrar invitación">Cerrar</button></form>
     </div>
     <div class="install-help">
+      <p>Llevá el cronológico en la pantalla principal del teléfono y consultá las suertes sin señal después de la primera carga.</p>
+      <button type="button" id="install-now">Instalar app</button>
+      <div id="install-steps" hidden>
       <p><strong>Android · Chrome</strong><br>En el menú ⋮, tocá <strong>Instalar aplicación</strong> o <strong>Agregar a la pantalla principal</strong>.</p>
       <p><strong>iPhone · Safari</strong><br>Tocá <strong>Compartir</strong> y luego <strong>Agregar a pantalla de inicio</strong>.</p>
-      <p>Abrí la app con conexión la primera vez y esperá la confirmación de que los datos quedaron disponibles sin internet.</p>
+      </div>
+      <form method="dialog"><button type="submit" class="install-later">Ahora no</button></form>
     </div>
   </dialog>
 </body>

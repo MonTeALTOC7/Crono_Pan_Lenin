@@ -187,6 +187,7 @@ async function loadData(checking = false) {
     byId('source').title = 'Copia del Maestro · incorporada ' + d(snapshot.importedAt) + ' · Aforo efectivo ' + d(snapshot.estimateDate);
     byId('workspace').hidden = false;
     renderFarm();
+    maybeOfferInstall();
     statusMessage(checking && !storedCopy && navigator.onLine && offlineReady
       ? (old === snapshot.version ? 'Ya tenés el corte disponible más reciente' : 'Corte actualizado') + ' · disponible sin internet'
       : '');
@@ -219,29 +220,52 @@ window.addEventListener('offline', () => statusMessage(snapshot ? '' : 'Sin inte
 window.addEventListener('online', () => void loadData());
 
 const installButton = byId('install');
+const installDialog = byId('install-dialog');
+const installDelayKey = 'crono-pan-lenin-install-later';
 function updateInstallButton() {
   installButton.hidden = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+}
+function maybeOfferInstall() {
+  if (!offlineReady || installButton.hidden || installDialog.open) return;
+  try {
+    if (Date.now() - Number(localStorage.getItem(installDelayKey)) < 86400000) return;
+  } catch { /* El almacenamiento puede estar deshabilitado. */ }
+  installDialog.showModal();
 }
 window.addEventListener('beforeinstallprompt', event => {
   event.preventDefault();
   installEvent = event;
 });
-window.addEventListener('appinstalled', () => { installButton.hidden = true; });
-installButton.addEventListener('click', async () => {
+window.addEventListener('appinstalled', () => {
+  installDialog.close();
+  installButton.hidden = true;
+});
+installDialog.addEventListener('close', () => {
+  try { localStorage.setItem(installDelayKey, String(Date.now())); } catch {}
+});
+installButton.addEventListener('click', () => {
+  byId('install-steps').hidden = true;
+  installDialog.showModal();
+});
+byId('install-now').addEventListener('click', async () => {
   if (!installEvent) {
-    byId('install-dialog').showModal();
+    byId('install-steps').hidden = false;
     return;
   }
   const event = installEvent;
   installEvent = null;
   await event.prompt();
+  installDialog.close();
 });
 updateInstallButton();
 
 if ('serviceWorker' in navigator) {
   navigator.serviceWorker.register('./sw.js').then(() => navigator.serviceWorker.ready).then(() => {
     offlineReady = true;
-    if (snapshot) statusMessage();
+    if (snapshot) {
+      statusMessage();
+      maybeOfferInstall();
+    }
   }).catch(() => {});
 }
 void loadData();

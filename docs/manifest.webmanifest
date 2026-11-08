@@ -1,7 +1,7 @@
 {
   "id": "./",
-  "name": "Cronológico de Campo CASUR",
-  "short_name": "Cronológico",
+  "name": "Cronológico Fincas Pansaco",
+  "short_name": "Fincas Pansaco",
   "description": "Consulta de suertes de Pansaco y Claudio Reyes.",
   "lang": "es-NI",
   "start_url": "./",

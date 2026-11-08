@@ -96,6 +96,9 @@ dialog::backdrop { background: #15251eb8; }
 .detail-note, .install-help { font-size: .87rem; line-height: 1.45; color: var(--muted); }
 .detail-note { margin-top: 10px; }
 .install-help p + p { margin-top: 12px; }
+.install-help #install-now { display: block; width: 100%; min-height: 48px; margin-top: 15px; border: 0; border-radius: 9px; background: var(--leaf); color: white; font-weight: 750; }
+.install-help #install-steps { margin-top: 14px; padding: 12px; border-radius: 9px; background: #f1f5ee; }
+.install-help .install-later { display: block; min-height: 44px; margin: 8px auto 0; border: 0; background: transparent; color: var(--leaf); font-weight: 700; }
 
 @media (min-width: 620px) {
   .hero { padding: 28px 25px 17px; }
