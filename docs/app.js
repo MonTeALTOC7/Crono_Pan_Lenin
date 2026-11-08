@@ -25,8 +25,8 @@ function element(tag, className, text) {
   return node;
 }
 
-function metric(label, value) {
-  const item = element('div');
+function metric(label, value, className = '') {
+  const item = element('div', className);
   item.append(element('dt', '', label), element('dd', '', value));
   return item;
 }
@@ -53,6 +53,11 @@ function stateBadge(row) {
   const style = row.participatesMilling ? 'mill' : row.participatesCurrentArea ? 'seed' : 'inactive';
   const label = row.operationalState || row.classification || 'Sin dato';
   return element('span', 'badge ' + style, label);
+}
+
+function tchTone(value) {
+  if (!Number.isFinite(value)) return 'unknown';
+  return value < 45 ? 'low' : value < 70 ? 'medium' : 'high';
 }
 
 function chooseFarm(code) {
@@ -114,7 +119,7 @@ function renderLots() {
   byId('empty').hidden = rows.length > 0;
   byId('list').replaceChildren(...rows.map(row => {
     const item = element('li');
-    const card = element('article', 'lot-card');
+    const card = element('article', 'lot-card tone-' + tchTone(row.tch));
     const button = element('button', 'open-lot', 'Suerte ' + row.suerte);
     button.type = 'button';
     button.setAttribute('aria-haspopup', 'dialog');
@@ -125,7 +130,9 @@ function renderLots() {
     top.append(identity, stateBadge(row));
     const variety = element('span', 'variety', [row.variedad, row.tipoRiego].filter(Boolean).join(' · ') || dash);
     const data = element('dl', 'lot-metrics');
-    data.append(metric('Área', n(row.area, ' ha')), metric('Edad actual', ageLabel(row)),
+    data.append(metric('Área', n(row.area, ' ha')),
+      metric('TCH zafra pasada', n(row.tch), 'tch-metric'),
+      metric('Edad actual', ageLabel(row)),
       metric('Cosecha propuesta', row.participatesCurrentArea ? d(row.proposedHarvest) : dash));
     card.append(top, variety, data);
     button.addEventListener('click', () => showLot(farm, row));
@@ -145,7 +152,7 @@ function showLot(farm, row) {
   const details = [
     ['Variedad', row.variedad], ['Tipo de riego', row.tipoRiego], ['N.º de riegos registrado', row.numeroRiegos],
     ['Último corte registrado', d(row.fUltCte)], ['Fecha de siembra', d(row.fSiembra)], ['N.º de cortes', row.corte],
-    ['TCH anterior', n(row.tch)], ['Toneladas estimadas', row.participatesMilling ? n(row.millingEstimatedTons, ' t') : dash],
+    ['TCH zafra pasada', n(row.tch)], ['Toneladas estimadas', row.participatesMilling ? n(row.millingEstimatedTons, ' t') : dash],
     ['Área de inventario', n(row.inventoryArea, ' ha')], ['Separación entre surcos', row.surco ? row.surco + ' m' : null],
     ['Textura', row.textura], ['Distancia', n(row.distancia, ' km')]
   ];

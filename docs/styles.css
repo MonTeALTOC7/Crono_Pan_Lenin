@@ -57,17 +57,27 @@ dd { font-variant-numeric: tabular-nums; font-size: .93rem; font-weight: 750; }
 .stats dd { margin-top: 3px; white-space: nowrap; }
 
 .lots { margin-top: 18px; }
+.tch-legend { display: flex; align-items: center; flex-wrap: wrap; gap: 5px 11px; margin: 0 0 9px; color: var(--muted); font-size: .68rem; }
+.tch-legend > span:first-child { font-weight: 720; color: var(--ink); }
+.legend-item { display: inline-flex; align-items: center; gap: 4px; white-space: nowrap; }
+.legend-item i { display: inline-block; width: 8px; height: 8px; border-radius: 50%; }
+.legend-item .low { background: #a44839; }
+.legend-item .medium { background: #a06a15; }
+.legend-item .high { background: #317157; }
 .controls { display: grid; grid-template-columns: 1fr 1fr; gap: 7px; }
 .search { grid-column: 1 / -1; display: flex; align-items: center; gap: 9px; padding-inline: 10px; background: var(--white); border: 1px solid #cad5c9; border-radius: 9px; color: var(--leaf); }
 .search:focus-within { outline: 2px solid #a2742e; outline-offset: 1px; }
 .search input { min-width: 0; width: 100%; min-height: 44px; border: 0; background: transparent; color: var(--ink); outline: none; }
 select { width: 100%; min-width: 0; min-height: 44px; padding-inline: 8px; border: 1px solid #cad5c9; background: var(--white); border-radius: 9px; font-size: .82rem; }
 .lot-list { list-style: none; margin: 9px 0 0; padding: 0; display: grid; grid-template-columns: minmax(0, 1fr); gap: 8px; }
-.lot-card { position: relative; display: block; width: 100%; min-height: 114px; text-align: left; border: 1px solid var(--line); border-radius: 12px; background: var(--white); padding: 11px 12px; }
-.lot-card:hover, .lot-card:focus-within { border-color: #84a58e; }
+.lot-card { --tone: #65756c; --tint: #f1f3ef; position: relative; display: block; width: 100%; text-align: left; border: 1px solid var(--line); border-left: 5px solid var(--tone); border-radius: 12px; background: var(--white); padding: 11px 12px; box-shadow: 0 1px 2px #2035290b; }
+.lot-card.tone-low { --tone: #a44839; --tint: #f9edea; }
+.lot-card.tone-medium { --tone: #a06a15; --tint: #faf3e5; }
+.lot-card.tone-high { --tone: #317157; --tint: #eaf4ed; }
+.lot-card:hover, .lot-card:focus-within { border-color: var(--tone); box-shadow: 0 3px 12px #2035291a; }
 .lot-top, .identity { display: flex; align-items: center; gap: 8px; }
 .lot-top { justify-content: space-between; }
-.open-lot { border: 0; padding: 0; background: transparent; font-size: .97rem; font-weight: 750; line-height: 1.2; }
+.open-lot { border: 0; border-radius: 6px; padding: 4px 7px; margin-left: -4px; background: var(--tint); color: var(--tone); font-size: .97rem; font-weight: 780; line-height: 1.2; }
 .open-lot::after { content: ""; position: absolute; inset: 0; border-radius: 12px; }
 .identity small, .variety { color: var(--muted); font-size: .72rem; }
 .variety { display: block; margin-top: 5px; }
@@ -75,8 +85,10 @@ select { width: 100%; min-width: 0; min-height: 44px; padding-inline: 8px; borde
 .badge.mill { background: #e5f0e4; color: #275637; }
 .badge.seed { background: #f6ebcd; color: #684712; }
 .badge.inactive { background: #eeece8; color: #504b40; }
-.lot-metrics { margin-top: 8px; padding-top: 7px; border-top: 1px solid #edf0eb; grid-template-columns: .8fr 1fr 1.22fr; }
+.lot-metrics { margin-top: 9px; padding-top: 8px; border-top: 1px solid #edf0eb; grid-template-columns: repeat(2, minmax(0, 1fr)); column-gap: 8px; row-gap: 7px; }
 .lot-metrics dd { margin-top: 2px; font-size: .83rem; }
+.lot-metrics .tch-metric { align-self: stretch; padding: 4px 7px; margin: -4px 0 -2px -7px; border-radius: 7px; background: var(--tint); }
+.lot-metrics .tch-metric dd { color: var(--tone); font-size: .95rem; }
 .empty { border: 1px dashed #b8c8b9; border-radius: 10px; padding: 16px; margin-top: 8px; font-size: .9rem; }
 .empty button { min-height: 44px; margin-top: 6px; background: transparent; border: 0; color: var(--leaf); font-weight: 700; text-decoration: underline; }
 footer { color: var(--muted); font-size: .73rem; text-align: center; padding: 21px 0 max(18px, env(safe-area-inset-bottom)); }

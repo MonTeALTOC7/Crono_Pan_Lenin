@@ -4,6 +4,8 @@ Aplicación móvil Cronológico de Campo CASUR.
 
 PWA de solo lectura para Pansaco (993) y Claudio Alberto Reyes Ruiz (25). Abre en suertes activas, conserva las demás en el catálogo y permite buscar por suerte, código o variedad. La ficha distingue el último corte registrado de la fecha de cosecha propuesta. La edad actual usa la más reciente entre último corte y siembra, con fecha base como respaldo.
 
+Las tarjetas muestran el TCH de la zafra pasada del campo `tch` del Maestro y lo distinguen con un rango visual: bajo <45, medio 45–<70, alto ≥70. Cuando falta el valor, se muestra «—» y una tarjeta neutra. El color nunca sustituye el valor numérico.
+
 ## Fuente y corte inicial
 
 - Maestro de Suertes de la App Negocios de Caña CASUR, datos de GitHub Pages contrastados con `main` en `1f9fe9aaef755a34e8cec2f2bbbfc487966fd1ab`.
