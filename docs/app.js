@@ -235,20 +235,29 @@ window.addEventListener('online', () => void loadData());
 
 const installButton = byId('install');
 const installDialog = byId('install-dialog');
+const installNow = byId('install-now');
+const installFeedback = byId('install-feedback');
 const installDelayKey = 'crono-pan-lenin-install-later';
 function updateInstallButton() {
   installButton.hidden = matchMedia('(display-mode: standalone)').matches || navigator.standalone === true;
+}
+function updateInstallOffer() {
+  installNow.hidden = !installEvent;
+  installFeedback.hidden = true;
+  installFeedback.textContent = '';
 }
 function maybeOfferInstall() {
   if (!offlineReady || installButton.hidden || installDialog.open) return;
   try {
     if (Date.now() - Number(localStorage.getItem(installDelayKey)) < 86400000) return;
   } catch { /* El almacenamiento puede estar deshabilitado. */ }
+  updateInstallOffer();
   installDialog.showModal();
 }
 window.addEventListener('beforeinstallprompt', event => {
   event.preventDefault();
   installEvent = event;
+  updateInstallOffer();
 });
 window.addEventListener('appinstalled', () => {
   installDialog.close();
@@ -258,19 +267,29 @@ installDialog.addEventListener('close', () => {
   try { localStorage.setItem(installDelayKey, String(Date.now())); } catch {}
 });
 installButton.addEventListener('click', () => {
-  byId('install-steps').hidden = true;
+  updateInstallOffer();
   installDialog.showModal();
 });
-byId('install-now').addEventListener('click', async () => {
-  if (!installEvent) {
-    byId('install-steps').hidden = false;
-    return;
-  }
+installNow.addEventListener('click', async () => {
+  if (!installEvent) return;
   const event = installEvent;
   installEvent = null;
-  await event.prompt();
-  installDialog.close();
+  updateInstallOffer();
+  try {
+    await event.prompt();
+    const choice = await event.userChoice;
+    if (choice?.outcome === 'accepted') {
+      installDialog.close();
+    } else {
+      installFeedback.textContent = 'La instalación no se completó. También podés usar el menú ⋮ de Chrome.';
+      installFeedback.hidden = false;
+    }
+  } catch {
+    installFeedback.textContent = 'El navegador no abrió la instalación. Usá el menú ⋮ de Chrome.';
+    installFeedback.hidden = false;
+  }
 });
+updateInstallOffer();
 updateInstallButton();
 
 if ('serviceWorker' in navigator) {

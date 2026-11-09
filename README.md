@@ -19,6 +19,8 @@ Las tarjetas muestran el TCH estimado de la zafra actual (`tchEst2627`) para mol
 2. En **Settings → Pages**, elegir **Deploy from a branch** y la rama autorizada con carpeta **/docs**. La app está preparada para servirse bajo la ruta del repositorio.
 3. Abrir el enlace HTTPS desde Chrome o Safari y esperar **Disponible sin internet**. Usar **Instalar** en la app. En iPhone se agrega mediante **Compartir → Agregar a pantalla de inicio**.
 
+En Android, abrir el enlace directamente en Chrome (no dentro de un visor de otra app). Cuando Chrome no ofrece su aviso nativo, el botón **Instalar** muestra de inmediato los pasos para usar **⋮ → Instalar aplicación** o **Agregar a pantalla principal**. El ZIP es código fuente, no un complemento instalable.
+
 Verificar el alcance de visibilidad antes de activar Pages. Una página pública permite abrir el enlace sin autenticación.
 
 ## Actualizar el corte desde el Maestro

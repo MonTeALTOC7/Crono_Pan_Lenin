@@ -82,11 +82,13 @@
       <form method="dialog"><button type="submit" aria-label="Cerrar invitación">Cerrar</button></form>
     </div>
     <div class="install-help">
-      <p>Llevá el cronológico en la pantalla principal del teléfono y consultá las suertes sin señal después de la primera carga.</p>
-      <button type="button" id="install-now">Instalar app</button>
-      <div id="install-steps" hidden>
-      <p><strong>Android · Chrome</strong><br>En el menú ⋮, tocá <strong>Instalar aplicación</strong> o <strong>Agregar a la pantalla principal</strong>.</p>
-      <p><strong>iPhone · Safari</strong><br>Tocá <strong>Compartir</strong> y luego <strong>Agregar a pantalla de inicio</strong>.</p>
+      <p>Agregá el cronológico a la pantalla principal para consultarlo sin señal después de la primera carga.</p>
+      <button type="button" id="install-now" hidden>Instalar en este dispositivo</button>
+      <p id="install-feedback" class="install-feedback" role="status" hidden></p>
+      <div id="install-steps">
+        <p><strong>En tu Samsung · Chrome</strong><br>Abrí esta página directamente en Chrome. Tocá el menú <strong>⋮</strong> y elegí <strong>Instalar aplicación</strong> o <strong>Agregar a pantalla principal</strong>. Confirmá la instalación.</p>
+        <p><strong>iPhone · Safari</strong><br>Tocá <strong>Compartir</strong> y después <strong>Agregar a pantalla de inicio</strong>.</p>
+        <p class="install-note">Es una app web: se instala desde el enlace abierto en el navegador, no desde el ZIP ni como extensión.</p>
       </div>
       <form method="dialog"><button type="submit" class="install-later">Ahora no</button></form>
     </div>
