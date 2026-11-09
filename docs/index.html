@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="es-NI">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#153c2d">
+  <meta name="description" content="Consulta de campo del cronológico de Pansaco y Claudio Reyes.">
+  <title>Cronológico Fincas Pansaco</title>
+  <link rel="manifest" href="./manifest.webmanifest">
+  <link rel="icon" href="./icons/icon-192.png">
+  <link rel="apple-touch-icon" href="./icons/icon-192.png">
+  <link rel="stylesheet" href="./styles.css">
+  <script defer src="./schema.js"></script>
+  <script defer src="./app.js"></script>
+</head>
+<body>
+  <header class="masthead">
+    <div class="wrap masthead-inner">
+      <div class="brand"><img src="./assets/negocios-de-cana.webp" width="43" height="43" alt="Negocios de Caña"><span>Cronológico <small>Fincas Pansaco</small></span></div>
+      <button type="button" class="install" id="install" aria-haspopup="dialog">Instalar</button>
+    </div>
+  </header>
+  <main class="wrap">
+    <section class="hero" aria-labelledby="title">
+      <p class="eyebrow"><span aria-hidden="true"></span> Consulta de campo</p>
+      <h1 id="title">Cronológico Fincas Pansaco</h1>
+      <p class="subtitle">Pansaco y Claudio Reyes</p>
+      <div class="assignment"><span>Próximo responsable de finca <strong>Lenin Iglesias</strong></span><span>Carlos Tijerino · Atención a Productores</span></div>
+      <div class="source-line">
+        <p id="source">Consultando el corte publicado…</p>
+        <button type="button" id="refresh" aria-label="Comprobar actualización" title="Comprobar actualización">
+          <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><path d="M20 11a8 8 0 1 0-1.6 5.8M20 4v7h-7"/></svg>
+        </button>
+      </div>
+    </section>
+    <p id="connection" class="connection" role="status"></p>
+    <noscript><p>Activá JavaScript para consultar las suertes.</p></noscript>
+    <section id="workspace" hidden aria-labelledby="farm-title">
+      <nav class="farms" aria-label="Elegir finca" id="farms"></nav>
+      <section class="farm-overview">
+        <div class="farm-heading"><h2 id="farm-title"></h2><span id="farm-code"></span></div>
+        <dl class="stats" id="stats"></dl>
+      </section>
+      <section class="lots" aria-labelledby="lots-title">
+        <div class="list-heading"><h2 id="lots-title">Suertes</h2><span id="count" aria-live="polite"></span></div>
+        <p class="tch-legend" aria-label="Colores según TCH estimado de la zafra 26/27">
+          <span>TCH estimado Z26/27</span><span class="legend-item"><i class="low" aria-hidden="true"></i>Bajo &lt;45</span>
+          <span class="legend-item"><i class="medium" aria-hidden="true"></i>Medio 45–&lt;70</span>
+          <span class="legend-item"><i class="high" aria-hidden="true"></i>Alto ≥70</span>
+        </p>
+        <div class="controls">
+          <label class="search">
+            <svg viewBox="0 0 24 24" width="19" height="19" fill="none" stroke="currentColor" stroke-width="1.8" aria-hidden="true"><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 4 4"/></svg>
+            <input id="search" type="search" placeholder="Suerte, código o variedad" aria-label="Buscar suerte, código o variedad" autocomplete="off">
+          </label>
+          <select id="filter" aria-label="Filtrar estado">
+            <option value="active">Activas</option><option value="all">Catálogo completo</option>
+            <option value="milling">Molienda</option><option value="seed">Semilla</option><option value="inactive">Fuera del área activa</option>
+          </select>
+          <select id="sort" aria-label="Ordenar suertes">
+            <option value="lot">N.º de suerte</option><option value="harvest">Cosecha propuesta</option>
+            <option value="lastCut">Último corte</option><option value="age">Mayor edad</option>
+          </select>
+        </div>
+        <div id="empty" class="empty" hidden><p>No se encontraron suertes con esta búsqueda.</p><button type="button" id="reset">Ver catálogo completo</button></div>
+        <ul id="list" class="lot-list"></ul>
+      </section>
+    </section>
+    <footer>Cronológico de campo · Consulta de solo lectura</footer>
+  </main>
+
+  <dialog id="lot-dialog" aria-labelledby="lot-title">
+    <div class="dialog-head">
+      <div><p class="eyebrow" id="lot-farm"></p><h2 id="lot-title"></h2></div>
+      <form method="dialog"><button type="submit" aria-label="Cerrar ficha">Cerrar</button></form>
+    </div>
+    <div id="lot-detail"></div>
+  </dialog>
+  <dialog id="install-dialog" aria-labelledby="install-title">
+    <div class="dialog-head">
+      <h2 id="install-title">Instalá Cronológico Fincas Pansaco</h2>
+      <form method="dialog"><button type="submit" aria-label="Cerrar invitación">Cerrar</button></form>
+    </div>
+    <div class="install-help">
+      <p>Llevá el cronológico en la pantalla principal del teléfono y consultá las suertes sin señal después de la primera carga.</p>
+      <button type="button" id="install-now">Instalar app</button>
+      <div id="install-steps" hidden>
+      <p><strong>Android · Chrome</strong><br>En el menú ⋮, tocá <strong>Instalar aplicación</strong> o <strong>Agregar a la pantalla principal</strong>.</p>
+      <p><strong>iPhone · Safari</strong><br>Tocá <strong>Compartir</strong> y luego <strong>Agregar a pantalla de inicio</strong>.</p>
+      </div>
+      <form method="dialog"><button type="submit" class="install-later">Ahora no</button></form>
+    </div>
+  </dialog>
+</body>
+</html>
